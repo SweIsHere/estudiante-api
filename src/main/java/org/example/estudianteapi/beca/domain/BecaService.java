@@ -26,6 +26,10 @@ public class BecaService {
     }
 
     public void deleteBeca(Long id) {
-        becaRepository.deleteById(id);
+        if (becaRepository.existsById(id)) {
+            becaRepository.deleteById(id);
+        } else {
+            throw new RuntimeException("Beca no encontrada con el id: " + id);
+        }
     }
 }
