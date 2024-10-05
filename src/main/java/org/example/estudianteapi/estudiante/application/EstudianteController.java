@@ -34,7 +34,7 @@ public class EstudianteController {
 
     @Operation(summary = "Crear un nuevo estudiante")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Estudiante creado exitosamente")
+            @ApiResponse(responseCode = "200", description = "Estudiante creado exitosamente")
     })
     @PostMapping
     public Estudiante createEstudiante(@RequestBody Estudiante estudiante) {

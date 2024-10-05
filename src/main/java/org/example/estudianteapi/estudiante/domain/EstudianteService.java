@@ -5,7 +5,9 @@ import org.example.estudianteapi.beca.domain.BecaService;
 import org.example.estudianteapi.estudiante.domain.Estudiante;
 import org.example.estudianteapi.estudiante.infrastructure.EstudianteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,7 +30,8 @@ public class EstudianteService {
     }
 
     public Estudiante getEstudianteById(Long id) {
-        return estudianteRepository.findById(id).orElseThrow(() -> new RuntimeException("Estudiante no encontrado"));
+        return estudianteRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Estudiante no encontrado"));
     }
 
     public Estudiante.EscalaPago getEscalaPagoByCorreo(String correo) {
@@ -36,7 +39,7 @@ public class EstudianteService {
         if (estudianteOpt.isPresent()) {
             return estudianteOpt.get().getEscalaPago();
         } else {
-            throw new RuntimeException("Estudiante no encontrado con el correo: " + correo);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Estudiante no encontrado por correo");
         }
     }
 

@@ -41,7 +41,7 @@ public class Estudiante {
 
     // Relación con la beca (N:1)
     @ManyToOne
-    @JoinColumn(name = "beca_id")
+    @JoinColumn(name = "beca_id", nullable = true)
     private Beca beca;
 
     public enum EscalaPago {
