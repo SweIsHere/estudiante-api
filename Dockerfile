@@ -1,5 +1,5 @@
 # Fase 1: Build de la aplicación
-FROM maven:3.8.6-openjdk-17-slim AS build
+FROM maven AS build
 
 # Establecer el directorio de trabajo en el contenedor para la fase de build
 WORKDIR /app
