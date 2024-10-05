@@ -26,6 +26,15 @@ public class EstudianteService {
         return estudianteRepository.findById(id).orElseThrow(() -> new RuntimeException("Estudiante no encontrado"));
     }
 
+    public Estudiante.EscalaPago getEscalaPagoByCorreo(String correo) {
+        Optional<Estudiante> estudianteOpt = estudianteRepository.findByCorreo(correo);
+        if (estudianteOpt.isPresent()) {
+            return estudianteOpt.get().getEscalaPago();
+        } else {
+            throw new RuntimeException("Estudiante no encontrado con el correo: " + correo);
+        }
+    }
+
     public void deleteEstudiante(Long id) {
         estudianteRepository.deleteById(id);
     }

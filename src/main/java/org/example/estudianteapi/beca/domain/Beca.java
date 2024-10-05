@@ -21,7 +21,7 @@ public class Beca {
     private Long id;
 
     @Column(nullable = false)
-    private Double monto;
+    private Double porcentajeCobertura; // Porcentaje que cubre la beca, por ejemplo, 50.0 para 50%
 
     @Column(nullable = false)
     private String fechaInicio;

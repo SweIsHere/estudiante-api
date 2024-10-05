@@ -42,6 +42,11 @@ public class EstudianteController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/escala-pago/{email}")
+    public Estudiante.EscalaPago getEscalaPagoByCorreo(@PathVariable String email) {
+        return estudianteService.getEscalaPagoByCorreo(email);
+    }
+
 
     @DeleteMapping("/{id}")
     public void deleteEstudiante(@PathVariable Long id) {

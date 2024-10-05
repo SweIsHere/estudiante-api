@@ -34,11 +34,26 @@ public class Estudiante {
     @Column(nullable = false)
     private String correo;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private EscalaPago escalaPago;
+
 
     // Relación con la beca (N:1)
     @ManyToOne
     @JoinColumn(name = "beca_id")
     private Beca beca;
 
+    public enum EscalaPago {
+        scale_A,
+        scale_B,
+        scale_C,
+
+        scale_D,
+
+        scale_E,
+
+
+    }
 
 }
