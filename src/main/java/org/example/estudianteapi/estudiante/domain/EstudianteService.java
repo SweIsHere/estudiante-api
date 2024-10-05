@@ -39,6 +39,10 @@ public class EstudianteService {
         estudianteRepository.deleteById(id);
     }
 
+    public boolean existsById(Long id) {
+        return estudianteRepository.existsById(id);
+    }
+
     public Optional<Estudiante> obtenerEstudiantePorCorreo(String correo) {
         return estudianteRepository.findByCorreo(correo);
     }

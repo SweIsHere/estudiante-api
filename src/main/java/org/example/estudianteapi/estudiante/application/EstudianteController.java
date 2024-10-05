@@ -49,9 +49,15 @@ public class EstudianteController {
 
 
     @DeleteMapping("/{id}")
-    public void deleteEstudiante(@PathVariable Long id) {
-        estudianteService.deleteEstudiante(id);
+    public ResponseEntity<Void> deleteEstudiante(@PathVariable Long id) {
+        if (estudianteService.existsById(id)) {
+            estudianteService.deleteEstudiante(id);
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
+
 
     @PutMapping("/{estudianteId}/beca/{becaId}")
     public Estudiante assignBecaToEstudiante(@PathVariable Long estudianteId, @PathVariable Long becaId) {
