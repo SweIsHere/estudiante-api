@@ -94,11 +94,16 @@ public class EstudianteController {
             @ApiResponse(responseCode = "404", description = "Estudiante o beca no encontrados")
     })
     @PutMapping("/{estudianteId}/beca/{becaId}")
-    public Estudiante assignBecaToEstudiante(@PathVariable Long estudianteId, @PathVariable Long becaId) {
-        Estudiante estudiante = estudianteService.getEstudianteById(estudianteId);
-        estudiante.setBeca(becaService.getBecaById(becaId));
-        return estudianteService.saveEstudiante(estudiante);
+    public ResponseEntity<Estudiante> assignBecaToEstudiante(@PathVariable Long estudianteId, @PathVariable Long becaId) {
+        try {
+            Estudiante estudianteActualizado = estudianteService.assignBecaToEstudiante(estudianteId, becaId);
+            return ResponseEntity.ok(estudianteActualizado);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
+
+
 
 
 

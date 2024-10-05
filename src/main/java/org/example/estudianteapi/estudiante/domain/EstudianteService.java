@@ -1,5 +1,7 @@
 package org.example.estudianteapi.estudiante.domain;
 
+import org.example.estudianteapi.beca.domain.Beca;
+import org.example.estudianteapi.beca.domain.BecaService;
 import org.example.estudianteapi.estudiante.domain.Estudiante;
 import org.example.estudianteapi.estudiante.infrastructure.EstudianteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,9 @@ public class EstudianteService {
 
     @Autowired
     private EstudianteRepository estudianteRepository;
+
+    @Autowired
+    private BecaService becaService;
 
     public List<Estudiante> getAllEstudiantes() {
         return estudianteRepository.findAll();
@@ -45,6 +50,19 @@ public class EstudianteService {
 
     public Optional<Estudiante> obtenerEstudiantePorCorreo(String correo) {
         return estudianteRepository.findByCorreo(correo);
+    }
+
+    public Estudiante assignBecaToEstudiante(Long estudianteId, Long becaId) {
+        Estudiante estudiante = estudianteRepository.findById(estudianteId)
+                .orElseThrow(() -> new RuntimeException("Estudiante no encontrado"));
+
+        Beca beca = becaService.getBecaById(becaId);
+        if (beca == null) {
+            throw new RuntimeException("Beca no encontrada");
+        }
+
+        estudiante.setBeca(beca);
+        return estudianteRepository.save(estudiante);
     }
 
 }
