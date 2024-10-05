@@ -29,6 +29,9 @@ public class Beca {
     @Column(nullable = false)
     private String fechaFin;
 
+    @Column(nullable = false)
+    private String nombre;
+
     // Relación con estudiantes (1:N)
     @OneToMany(mappedBy = "beca", cascade = CascadeType.ALL)
     private List<Estudiante> estudiantes;

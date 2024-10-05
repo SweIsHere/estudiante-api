@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.example.estudianteapi.beca.domain.Beca;
-import org.example.estudianteapi.inscripcion.domain.Inscripcion;
 
 import java.util.List;
 
@@ -41,7 +40,5 @@ public class Estudiante {
     @JoinColumn(name = "beca_id")
     private Beca beca;
 
-    // Relación con inscripción (1:N)
-    @OneToMany(mappedBy = "estudiante", cascade = CascadeType.ALL)
-    private List<Inscripcion> inscripciones;
+
 }
