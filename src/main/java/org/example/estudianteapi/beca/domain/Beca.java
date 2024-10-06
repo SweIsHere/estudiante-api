@@ -1,6 +1,7 @@
 package org.example.estudianteapi.beca.domain;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -37,6 +38,7 @@ public class Beca {
 
     // Relación con estudiantes (1:N)
     @OneToMany(mappedBy = "beca", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Estudiante> estudiantes;
 }
 
