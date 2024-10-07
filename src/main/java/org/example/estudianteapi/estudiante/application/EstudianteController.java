@@ -7,10 +7,13 @@ import org.example.estudianteapi.beca.domain.BecaService;
 import org.example.estudianteapi.estudiante.domain.Estudiante;
 import org.example.estudianteapi.estudiante.domain.EstudianteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -101,6 +104,19 @@ public class EstudianteController {
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
+    }
+
+
+    @Operation(summary = "Echo confirmer")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Beca asignada exitosamente al estudiante")
+    })
+    @GetMapping("/status")
+    public ResponseEntity<Map<String, String>> getStatus() {
+        Map<String, String> response = new HashMap<>();
+        response.put("Status", "UP");
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 
